@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-article',
@@ -6,7 +6,7 @@ import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy
   styleUrls: ['./article.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent implements OnInit, OnChanges {
 
   @Input()
   item: any;
@@ -22,6 +22,12 @@ export class ArticleComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+
   }
 
   doDelete() {

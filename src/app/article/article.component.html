@@ -1,15 +1,15 @@
 <article class="post" id="post0">
   <header class="post-header">
     <h2 class="post-title">
-      <a *ngIf="!isEditing" [href]="item.href">{{ item.title }}</a>
-      <input *ngIf="isEditing" type="text" class="form-control"
+      <a *ngIf="!isEditing" [href]="item.href">{{ item.title | mask:10 }}</a>
+      <input [style.display]="isEditing ? '' : 'none'" type="text" class="form-control"
              [value]="item.title" #tTitle
              (keyup.escape)="doCancelTitle()"
              (keyup.enter)="doSaveTitle(tTitle.value)">
     </h2>
     <div class="post-info clearfix">
       <span class="post-date">
-        <i class="glyphicon glyphicon-calendar"></i>{{item.date}}</span>
+        <i class="glyphicon glyphicon-calendar"></i>{{item.date | date:'yyyy-M-d'}}</span>
       <span class="post-author">
         <i class="glyphicon glyphicon-user"></i>
         <a href="http://blog.miniasp.com/author/will.aspx">{{item.author}}</a>
@@ -18,11 +18,9 @@
         <i class="glyphicon glyphicon-folder-close"></i>
         <a [href]="item['category-link']">{{item.category}}</a>
       </span>
-
       <button (click)="doDelete()">刪除</button>
       <button (click)="doEditTitle()" *ngIf="!isEditing">編輯標題</button>
       <button (click)="doSaveTitle(tTitle.value)" *ngIf="isEditing">儲存標題</button>
-
     </div>
   </header>
   <section class="post-body text" [innerHTML]="item.summary">
