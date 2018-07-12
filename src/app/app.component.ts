@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
   keyword = '';
-  data: any = {};
+  data: any[] = [];
 
   ngOnInit(): void {
 
@@ -19,6 +19,12 @@ export class AppComponent implements OnInit {
         this.data = JSON.parse(json);
       });
 
+  }
+
+  deleteArticle(id: number) {
+    this.data = this.data.filter((value, index) => {
+      return value.id != id;
+    })
   }
 
   keywordChange(value: string) {
