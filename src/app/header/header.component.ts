@@ -11,6 +11,8 @@ export class HeaderComponent implements OnInit {
   subtitle = '記載著 Will 在網路世界的學習心得與技術分享';
   logourl = '/assets/images/logo.png';
 
+  clickCount = 0;
+
   constructor() { }
 
   ngOnInit() {
@@ -20,10 +22,18 @@ export class HeaderComponent implements OnInit {
   }
 
   changeTitle(evt: MouseEvent) {
+    this.clickCount++;
     console.log(evt);
     if (evt.ctrlKey) {
       this.sitename = 'The Will Will Web';
     }
+  }
+
+  getStyle() {
+    return {
+      'font-size': (12 + this.clickCount)+'px',
+      'color': 'red'
+    };
   }
 
 }
