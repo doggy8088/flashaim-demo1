@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  keyword = '';
+
+  keywordChange(value: string) {
+    this.keyword = value;
+  }
 }
