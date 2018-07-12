@@ -1,7 +1,11 @@
 <article class="post" id="post0">
   <header class="post-header">
     <h2 class="post-title">
-      <a [href]="item.href">{{ item.title }}</a>
+      <a *ngIf="!isEditing" [href]="item.href">{{ item.title }}</a>
+      <input *ngIf="isEditing" type="text" class="form-control"
+             [value]="item.title" #tTitle
+             (keyup.escape)="doCancelTitle()"
+             (keyup.enter)="doSaveTitle(tTitle.value)">
     </h2>
     <div class="post-info clearfix">
       <span class="post-date">
@@ -16,6 +20,8 @@
       </span>
 
       <button (click)="doDelete()">刪除</button>
+      <button (click)="doEditTitle()" *ngIf="!isEditing">編輯標題</button>
+      <button (click)="doSaveTitle(tTitle.value)" *ngIf="isEditing">儲存標題</button>
 
     </div>
   </header>

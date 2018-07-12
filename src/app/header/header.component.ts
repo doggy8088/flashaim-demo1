@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
 
@@ -12,6 +13,8 @@ export class HeaderComponent implements OnInit {
   logourl = '/assets/images/logo.png';
 
   clickCount = 0;
+
+  @Input() data: any;
 
   constructor() { }
 

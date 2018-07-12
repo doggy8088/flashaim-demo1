@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
-  styleUrls: ['./article.component.css']
+  styleUrls: ['./article.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleComponent implements OnInit {
 
@@ -13,6 +14,11 @@ export class ArticleComponent implements OnInit {
   @Output()
   delete = new EventEmitter<any>();
 
+  @Output()
+  changeTitle = new EventEmitter<any>();
+
+  isEditing = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -20,5 +26,22 @@ export class ArticleComponent implements OnInit {
 
   doDelete() {
     this.delete.emit(this.item.id);
+  }
+
+  doEditTitle() {
+    this.isEditing = true;
+  }
+
+  doSaveTitle(newTitle) {
+    this.isEditing = false;
+    // this.item.title = newTitle;
+    this.changeTitle.emit({
+      id: this.item.id,
+      newTitle: newTitle
+    });
+  }
+
+  doCancelTitle() {
+    this.isEditing = false;
   }
 }

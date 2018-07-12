@@ -1,4 +1,4 @@
-<app-header #tHeader></app-header>
+<app-header #tHeader [data]="data"></app-header>
 
 <!-- CONTAINER START-->
 <section class="container">
@@ -12,7 +12,9 @@
         <!-- Article START-->
         <ng-container *ngFor="let item of data">
 
-          <app-article [item]="item" (delete)="deleteArticle($event)"></app-article>
+          <app-article [item]="item"
+            (delete)="deleteArticle($event)"
+            (changeTitle)="changeArticleTitle($event)"></app-article>
 
         </ng-container>
         <!-- Article END-->

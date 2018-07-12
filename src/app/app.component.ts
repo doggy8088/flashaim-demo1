@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +25,33 @@ export class AppComponent implements OnInit {
     this.data = this.data.filter((value, index) => {
       return value.id != id;
     })
+  }
+
+  changeArticleTitle(change: {id: number, newTitle: string}) {
+
+    // this.data.forEach((value, index) => {
+    //   if (value.id == change.id) {
+    //     value.title = change.newTitle;
+    //   }
+    // })
+
+    this.data = this.data.map((value, index) => {
+      if (value.id == change.id) {
+
+        // BAD CODE
+        // value.title = change.newTitle;
+        // return value;
+
+        // Object spread operator
+        return {...value, title: change.newTitle};
+
+        // ES5 Object.assign()
+        // return Object.assign(value, { title: change.newTitle});
+      }
+      else {
+        return value;
+      }
+    });
   }
 
   keywordChange(value: string) {
