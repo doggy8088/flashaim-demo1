@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   load() {
 
-    return fetch('/api/articles.json')
-      .then((response) => {
-        return response.text();
+    return this.http.get('/api/articles.json').toPromise()
+      .then((response: any[]) => {
+        return response;
       });
 
   }
