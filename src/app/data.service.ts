@@ -10,10 +10,7 @@ export class DataService {
 
   load() {
 
-    return this.http.get('/api/articles.json').toPromise()
-      .then((response: any[]) => {
-        return response;
-      });
+    return this.http.get('/api/articles.json');
 
   }
 

@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.datasvc.load().then((json) => {
+    this.datasvc.load().subscribe((json: any[]) => {
       this.data = json;
     });
   }
