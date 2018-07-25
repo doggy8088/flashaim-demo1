@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +11,13 @@ export class AppComponent implements OnInit {
   keyword = '';
   data: any[] = [];
 
+  constructor(private datasvc: DataService) {
+  }
+
   ngOnInit(): void {
-
-    fetch('/api/articles.json')
-      .then((response) => {
-        return response.text();
-      }).then((json) => {
-        this.data = JSON.parse(json);
-      });
-
+    this.datasvc.load().then((json) => {
+      this.data = JSON.parse(json);
+    });
   }
 
   deleteArticle(id: number) {
